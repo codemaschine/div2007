@@ -1,4 +1,21 @@
+2022-06-09 Franz Holzinger <franz@ttproducts.de>
+    * bugfixes PHP 8: FlexformUtility::get must check if array index is set
 
+2022-05-12 Franz Holzinger <franz@ttproducts.de>
+    * bugfixes TYPO3 10 and 11: Deprecation no. 75327 $TSFE->csConv()
+
+2022-05-05 Franz Holzinger <franz@ttproducts.de>
+    * bugfixes PHP 8: FlexformUtility::get must return string
+    * forceCharset has been removed from TYPO3
+
+2022-05-04 Franz Holzinger <franz@ttproducts.de>
+    * bugfix PHP 8: FlexformUtility::get must return string
+
+2022-03-02 Franz Holzinger <franz@ttproducts.de>
+    * bugfix PHP 7.4: keep compatibility
+
+2022-02-24 Franz Holzinger <franz@ttproducts.de>
+    * bugfix PHP 8: empty variables
 
 2022-02-17 Franz Holzinger <franz@ttproducts.de>
     * Deprecation no. 86389: Replace GeneralUtility::_GETset by JambageCom\Div2007\Utility\ControlUtility::_GETset .

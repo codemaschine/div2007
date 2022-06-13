@@ -136,7 +136,7 @@ class FlexformUtility {
     * @param   string     $sheet Sheet pointer, eg. "sDEF"
     * @param   string     $lang Language pointer, eg. "lDEF"
     * @param   string     $value Value pointer, eg. "vDEF"
-    * @return  array      The content.
+    * @return  string      The content.
     */
     static public function get () {
 
@@ -168,7 +168,7 @@ class FlexformUtility {
         ) {
             $sheetArray = $_flexForm['data'][$sheet][$lang];
         }
-        $result = null;
+        $result = '';
         if (is_array($sheetArray)) {
             $result =
                 static::_getFFValueFromSheetArray(
@@ -186,13 +186,14 @@ class FlexformUtility {
     * @param   array      Multidimensiona array, typically FlexForm contents
     * @param   array      Array where each value points to a key in the FlexForms content - the input array will have the value returned pointed to by these keys. All integer keys will not take their integer counterparts, but rather traverse the current position in the array an return element number X (whether this is right behavior is not settled yet...)
     * @param   string     Value for outermost key, typ. "vDEF" depending on language.
-    * @return  mixed      The value, typ. string. private
+    * @return  string     The value, typ. string. private
     */
     static public function _getFFValueFromSheetArray (
         $sheetArray,
         $fieldNameArr,
         $value
     ) {
+        $result = '';
         $tempArr = $sheetArray;
         foreach($fieldNameArr as $k => $v) {
             if (
@@ -203,16 +204,26 @@ class FlexformUtility {
                     foreach($tempArr as $values) {
                         if ($c == $v) {
                             $tempArr = $values;
-                            break;
+                            break 2;
                         }
                         $c++;
                     }
                 }
-            } else {
+            } else if (
+                is_array($tempArr) && 
+                isset($tempArr[$v])
+            ) {
                 $tempArr = $tempArr[$v];
             }
         }
-        return $tempArr[$value];
+        
+        if (
+            is_array($tempArr) && 
+            isset($tempArr[$value])
+        ) {
+            $result = $tempArr[$value];
+        }
+        return $result;
     }
 }
 
