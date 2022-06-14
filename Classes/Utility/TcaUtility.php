@@ -46,7 +46,9 @@ class TcaUtility {
 	 * @param	array		Array of fields to remove
 	 * @return	string		Content stream
 	 */
-	static public function removeField (array &$tableTca, array $fieldArray) {
+	static public function removeField (array &$tableTca, $fieldArray) {
+		if (!is_array($fieldArray))
+			$fieldArray = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $fieldArray, 1);
 
         $tmpArray = [];
         if (
